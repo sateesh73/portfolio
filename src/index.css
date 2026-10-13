@@ -1,0 +1,272 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #0b0d12;
+  --color-surface-0: #10131b;
+  --color-surface-1: #151923;
+  --color-surface-2: #1c2230;
+  --color-surface-3: #242b3c;
+  
+  --color-amber-primary: #e5a442;
+  --color-amber-light: #f5bc65;
+  --color-amber-dim: #b87e2b;
+  
+  --color-cyan-subtle: #38bdf8;
+  --color-emerald-status: #34d399;
+  --color-coral-accent: #f87171;
+
+  --font-display: 'Space Grotesk', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Base Styles & Lenis Butter-Smooth Scrolling */
+html {
+  color-scheme: dark;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* CRT Scanlines Overlay */
+.scanlines-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  background: linear-gradient(
+    rgba(18, 16, 12, 0) 50%, 
+    rgba(0, 0, 0, 0.22) 50%
+  );
+  background-size: 100% 3px;
+  opacity: 0.65;
+  transition: opacity 0.3s ease;
+}
+
+body.scanlines-off .scanlines-overlay {
+  opacity: 0;
+}
+
+/* Ambient Subtle Matrix Grid */
+.ambient-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+}
+
+/* 3D Floating Terminal Keycap Buttons */
+.btn-terminal-3d {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #e2e8f0;
+  background: linear-gradient(180deg, #242c3d 0%, #171c28 100%);
+  border: 1px solid rgba(229, 164, 66, 0.25);
+  border-bottom: 2px solid #0f131c;
+  border-radius: 7px;
+  box-shadow: 0 5px 0 #08090d, 0 8px 18px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transform: translateY(0);
+  transition: all 0.16s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-terminal-3d::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 6px;
+  right: 6px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+
+.btn-terminal-3d:hover {
+  transform: translateY(-3px);
+  border-color: #e5a442;
+  color: #f5bc65;
+  box-shadow: 0 8px 0 #08090d, 0 14px 26px rgba(0, 0, 0, 0.75), 0 0 16px rgba(229, 164, 66, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-terminal-3d:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #08090d, 0 4px 10px rgba(0, 0, 0, 0.8), inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.btn-terminal-3d.active {
+  background: linear-gradient(180deg, #2c3549 0%, #1c2230 100%);
+  border-color: #e5a442;
+  color: #e5a442;
+}
+
+/* Primary CTA Keycap */
+.btn-primary-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: linear-gradient(180deg, #d89634 0%, #aa701e 100%);
+  border: 1px solid #ffbe65;
+  border-bottom: 3px solid #7d4e0e;
+  border-radius: 8px;
+  color: #0d0f14;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 0 #573507, 0 12px 24px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transform: translateY(0);
+  transition: all 0.16s ease;
+  cursor: pointer;
+}
+
+.btn-primary-3d:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(180deg, #e5a442 0%, #b87b22 100%);
+  box-shadow: 0 9px 0 #573507, 0 18px 30px rgba(0, 0, 0, 0.8), 0 0 24px rgba(229, 164, 66, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: #000;
+}
+
+.btn-primary-3d:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #573507, 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Secondary CTA Keycap */
+.btn-secondary-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  background: linear-gradient(180deg, #242c3d 0%, #161a25 100%);
+  border: 1px solid rgba(229, 164, 66, 0.28);
+  border-bottom: 3px solid #0e1118;
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 5px 0 #08090d, 0 8px 18px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transform: translateY(0);
+  transition: all 0.16s ease;
+  cursor: pointer;
+}
+
+.btn-secondary-3d:hover {
+  transform: translateY(-3px);
+  border-color: #e5a442;
+  color: #f5bc65;
+  box-shadow: 0 8px 0 #08090d, 0 14px 26px rgba(0, 0, 0, 0.75), 0 0 16px rgba(229, 164, 66, 0.22);
+}
+
+.btn-secondary-3d:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #08090d, 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Square Icon Keycap */
+.icon-keycap {
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+  background: linear-gradient(180deg, #202636 0%, #151a24 100%);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-bottom: 2px solid #0d1017;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 0 #08090d, 0 8px 16px rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.icon-keycap:hover {
+  transform: translateY(-2px);
+  color: #e5a442;
+  border-color: rgba(229, 164, 66, 0.35);
+  box-shadow: 0 7px 0 #08090d, 0 12px 20px rgba(0, 0, 0, 0.75);
+}
+
+.icon-keycap:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 #08090d, 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Terminal Small Suggestion Chip */
+.chip-cmd-3d {
+  padding: 5px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: #1c2230;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-bottom: 2px solid #0b0e14;
+  border-radius: 5px;
+  color: #f5bc65;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #08090d, 0 6px 12px rgba(0, 0, 0, 0.5);
+  transition: all 0.14s ease;
+}
+
+.chip-cmd-3d:hover {
+  transform: translateY(-2px);
+  border-color: #e5a442;
+  box-shadow: 0 6px 0 #08090d, 0 10px 18px rgba(0, 0, 0, 0.7);
+}
+
+.chip-cmd-3d:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #08090d, 0 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Floating Terminal Graphic Animation */
+@keyframes float-terminal {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-0.5deg);
+  }
+}
+
+.animate-float-terminal {
+  animation: float-terminal 6s ease-in-out infinite;
+}
+
+/* Pulsing Status Dot */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite ease-in-out;
+}
